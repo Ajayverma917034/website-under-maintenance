@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Under Maintenance</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: #0a0a0f;
+      color: #f0ede6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 200, 50, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 200, 50, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 180, 30, 0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 640px;
+      width: 100%;
+      animation: fadeIn 0.8s ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icon-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 180, 30, 0.4);
+      background: rgba(255, 180, 30, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 180, 30, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 0 16px rgba(255, 180, 30, 0);
+      }
+    }
+
+    .icon-ring svg {
+      width: 40px;
+      height: 40px;
+      stroke: #ffb41e;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffb41e;
+      background: rgba(255, 180, 30, 0.1);
+      border: 1px solid rgba(255, 180, 30, 0.25);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f0ede6 30%, #ffb41e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .site-name {
+      font-style: italic;
+    }
+
+    p {
+      font-size: 1rem;
+      color: rgba(240, 237, 230, 0.55);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .progress-track {
+      height: 3px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 68%;
+      background: linear-gradient(90deg, #ffb41e, #ff7f1e);
+      border-radius: 999px;
+      animation: shimmer 2s linear infinite;
+      background-size: 200%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% center;
+      }
+
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    .progress-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: rgba(240, 237, 230, 0.35);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+      margin: 2rem 0;
+    }
+
+    .meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: rgba(240, 237, 230, 0.3);
+      letter-spacing: 0.06em;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      margin-right: 6px;
+      vertical-align: middle;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
+  <div class="container">
+    <div class="icon-ring">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    </div>
+
+    <div class="badge">Scheduled Maintenance</div>
+
+    <h1>
+      <span class="site-name" id="site-name">Website</span><br />
+      is under maintenance
+    </h1>
+
+    <p>
+      We're making some improvements to bring you a better experience.
+      Our team is working hard to get everything up and running again.
+      We'll be back shortly — hang tight!
+    </p>
+
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+    <div class="progress-label">
+      <span>Work in progress</span>
+      <span>68%</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meta">
+      <span class="dot"></span>
+      Systems monitored &nbsp;·&nbsp; Est. completion: coming soon
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const website = params.get('website');
+    const el = document.getElementById('site-name');
+    if (website) {
+      el.textContent = website.charAt(0).toUpperCase() + website.slice(1);
+      document.title = website + ' — Under Maintenance';
+    }
+  </script>
+</body>
+
+</html>
